@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     branches:
-      - v8
+      - v10
 
 env:
   HUSKY: 0
