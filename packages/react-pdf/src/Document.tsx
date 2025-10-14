@@ -1098,7 +1098,8 @@ const Document = forwardRef(function Document(
       const download = async () => {
         try {
           const data = await pdf.getData();
-          const blob = new Blob([data], { type: 'application/pdf' });
+          const uint8Data = new Uint8Array(data);
+          const blob = new Blob([uint8Data.buffer], { type: 'application/pdf' }); // FIXED
 
           await downloadManager.current.download(blob, url, filename);
         } catch {
@@ -1117,7 +1118,8 @@ const Document = forwardRef(function Document(
 
         try {
           const data = await pdf.saveDocument();
-          const blob = new Blob([data], { type: 'application/pdf' });
+          const uint8Data = new Uint8Array(data);
+          const blob = new Blob([uint8Data.buffer], { type: 'application/pdf' }); // FIXED
           await downloadManager.current.download(blob, url, filename);
         } catch (reason: any) {
           // When the PDF document isn't ready, or the PDF file is still

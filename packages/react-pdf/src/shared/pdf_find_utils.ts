@@ -124,7 +124,7 @@ function getNormalizeWithNFKC() {
   NormalizeWithNFKC ||= isSafari ? safariNFKC : genericNFKC;
 
   const ranges = [];
-  const range = [];
+  let range: number[] = []; // FIXED
   const diacriticsRegex = /^\p{M}$/u;
 
   // Some chars must be replaced by their NFKC counterpart during a search.

@@ -53,7 +53,7 @@ export default function TextLayer() {
 
   const [textContentState, textContentDispatch] = useResolver<TextContent>();
   const { value: textContent, error: textContentError } = textContentState;
-  const endElement = useRef<HTMLElement>();
+  const endElement = useRef<HTMLElement>(null);
   const textHighlighter = useRef(
     new TextHighlighter({
       pageIndex,
