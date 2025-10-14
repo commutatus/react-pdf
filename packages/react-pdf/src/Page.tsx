@@ -371,7 +371,7 @@ const Page: React.FC<PageProps> = function Page(props) {
     'Attempted to load a page, but no document was specified. Wrap <Page /> in a <Document /> or pass explicit `pdf` prop.',
   );
 
-  const pageIndex = isProvided(pageNumberProps) ? pageNumberProps - 1 : pageIndexProps ?? null;
+  const pageIndex = isProvided(pageNumberProps) ? pageNumberProps - 1 : (pageIndexProps ?? null);
 
   const pageNumber = pageNumberProps ?? (isProvided(pageIndexProps) ? pageIndexProps + 1 : null);
 
@@ -662,10 +662,10 @@ const Page: React.FC<PageProps> = function Page(props) {
         ['--scale-factor' as string]: `${(pdfjsInternalScale || 1) * pdfjs.PixelsPerInch.PDF_TO_CSS_UNITS}`,
         backgroundColor: canvasBackground || 'white',
         position: 'relative',
-        // minWidth: 'min-content',
-        // minHeight: 'min-content',
-        // maxWidth: 'min-content',
-        // maxHeight: 'min-content',
+        minWidth: 'min-content',
+        minHeight: 'min-content',
+        maxWidth: 'min-content',
+        maxHeight: 'min-content',
       }}
       {...eventProps}
     >

@@ -205,6 +205,15 @@ export type DocumentProps = {
    */
   onLoadSuccess?: OnDocumentLoadSuccess;
   onPageChange?: any;
+
+  /**
+   * Function called when the document Annotation is successfully loaded.
+   *
+   * @example (ann) => alert('Loaded a Annotation',ann)
+   *
+   */
+  onAnnotationLoadSuccess?: (ann: any) => {};
+
   /**
    * Function called when a password-protected PDF is loaded.
    *
@@ -390,6 +399,7 @@ const Document = forwardRef(function Document(
     onLoadError: onLoadErrorProps,
     onLoadProgress,
     onLoadSuccess: onLoadSuccessProps,
+    onAnnotationLoadSuccess,
     onPageChange: onPageChangeProps,
     onPassword = defaultOnPassword,
     onSourceError: onSourceErrorProps,
@@ -555,10 +565,12 @@ const Document = forwardRef(function Document(
 
       const onAnnotationDelete = (...args: any) => {
         onAnnotationUpdate(...args, { type: 'delete' });
+        onAnnotationLoadSuccess ? onAnnotationLoadSuccess(annotationEditorUiManager) : null;
       };
 
       const onAnnotationUpdateWrapper = (...args: any) => {
         onAnnotationUpdate(...args, { type: 'update' });
+        onAnnotationLoadSuccess ? onAnnotationLoadSuccess(annotationEditorUiManager) : null;
       };
 
       eventBus.current._on('com_annotationupdated', onAnnotationUpdateWrapper);
@@ -817,6 +829,8 @@ const Document = forwardRef(function Document(
 
       // TODO: Is there a case where this can run multiple times?
       annotationEditorUiManager.loadAnnotations({ annotationsList });
+      // console.log(annotationEditorUiManager)
+      onAnnotationLoadSuccess ? onAnnotationLoadSuccess(annotationEditorUiManager) : null;
     },
     [canLoadAnnotations, annotationsList],
   );

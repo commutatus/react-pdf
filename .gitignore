@@ -5,6 +5,8 @@
 .cache
 .playwright
 .tmp
+**/.yalc
+yalc.lock
 *.tsbuildinfo
 .eslintcache
 
