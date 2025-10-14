@@ -432,8 +432,8 @@ const Document = forwardRef(function Document(
   );
   const pages = useRef<HTMLDivElement[]>([]);
   const annotationEditorLayers = useRef<any>([]);
-  const prevFile = useRef<File>();
-  const prevOptions = useRef<Options>();
+  const prevFile = useRef<File>(null);
+  const prevOptions = useRef<Options>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [canLoadAnnotations, setCanLoadAnnotations] = useState(false);
   const downloadManager = useRef(new DownloadManager());
